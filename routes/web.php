@@ -64,6 +64,10 @@ Route::post( '/paymentSuccess', [InvoiceController::class, 'paymentSuccess'] );
 Route::post( '/paymentCancel', [InvoiceController::class, 'paymentCancel'] );
 Route::post( '/paymentFailed', [InvoiceController::class, 'paymentFailed'] );
 
-Route::get( '/', function () {
-    return view( 'welcome' );
-} );
+// Page Routes
+Route::view( '/', 'home' )->name( 'home' );
+Route::view( '/category-product', 'pages.productByCategory' );
+Route::view( '/brand-product', 'pages.productByBrand' );
+Route::view( '/policies', 'pages.policy' );
+Route::view( '/product', 'pages.product' );
+Route::view( '/login', 'pages.loginPage' );

@@ -28,6 +28,7 @@ class SSLCommerz {
                 "cus_postcode"     => $user->cust_postcode,
                 "cus_country"      => $user->cust_country,
                 "cus_phone"        => $user->cust_phone,
+                "cus_fax"          => $user->cust_phone,
                 "shipping_method"  => "YES",
                 "ship_name"        => $user->ship_name,
                 "ship_add1"        => $user->ship_add,
