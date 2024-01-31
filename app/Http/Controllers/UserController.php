@@ -66,6 +66,6 @@ class UserController extends Controller {
     }
 
     public function userLogout() {
-        return redirect( '/userLogin' )->cookie( 'token', '', -1 );
+        return redirect( '/' )->cookie( 'token', '', -1 );
     }
 }

@@ -1,16 +1,23 @@
-@extends('layout.app')
-
-@section('content')
-    @include('components.menubar')
-    @include('components.cartList')
-    @include('components.topBrands')
-    @include('components.footer')
+@if (Cookie::get('token') === null)
     <script>
-        (async () => {
-            await category();
-            await cartList();
-            $(".preloader").delay(90).fadeOut(100).addClass('loaded');
-            await brands();
-        })()
+        sessionStorage.clear();
+        window.location.href = "/login";
     </script>
-@endsection
+@else
+    @extends('layout.app')
+
+    @section('content')
+        @include('components.menubar')
+        @include('components.cartList')
+        @include('components.topBrands')
+        @include('components.footer')
+        <script>
+            (async () => {
+                await category();
+                await cartList();
+                $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+                await brands();
+            })()
+        </script>
+    @endsection
+@endif

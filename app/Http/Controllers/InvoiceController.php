@@ -9,18 +9,15 @@ use App\Models\Invoice;
 use App\Models\InvoiceProduct;
 use App\Models\ProductCart;
 use Exception;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller {
-    public function invoiceList( Request $request ): JsonResponse {
+    public function invoiceList( Request $request ) {
         $userId = $request->header( 'id' );
-        $data   = Invoice::where( 'user_id', $userId )->get();
-
-        return ResponseHelper::Output( 'success', $data, 200 );
+        return Invoice::where( 'user_id', $userId )->get();
     }
-    public function createInvoice( Request $request ): JsonResponse {
+    public function createInvoice( Request $request ) {
         DB::beginTransaction();
         try {
             $userId    = $request->header( 'id' );
@@ -82,12 +79,11 @@ class InvoiceController extends Controller {
         }
     }
 
-    public function invoiceProductsList( Request $request ): JsonResponse {
+    public function invoiceProductsList( Request $request ) {
         $userId    = $request->header( 'id' );
         $invoiceId = $request->invoice_id;
-        $data      = InvoiceProduct::where( ['user_id' => $userId, 'invoice_id' => $invoiceId] )->with( 'products' )->get();
 
-        return ResponseHelper::Output( 'success', $data, 200 );
+        return InvoiceProduct::where( ['user_id' => $userId, 'invoice_id' => $invoiceId] )->with( 'products' )->get();
     }
 
     public function paymentSuccess( Request $request ) {

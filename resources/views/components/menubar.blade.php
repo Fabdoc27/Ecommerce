@@ -15,12 +15,20 @@
                         <ul class="header_list">
                             <li><a href="/policies?type=about">About</a></li>
 
-                            {{-- @if (Cookie::get('token') !== null)
-                                <li><a href="{{ url('/profile') }}"> <i class="linearicons-user"></i> Account</a></li>
-                                <li><a class="btn btn-danger btn-sm" href="{{ url('/logout') }}"> Logout</a></li>
+                            @if (Cookie::get('token') !== null)
+                                <li>
+                                    <a href="{{ route('profile') }}"> <i class="linearicons-user"></i> Account</a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-danger btn-sm" href="{{ route('logout') }}"> Logout
+                                    </a>
+                                </li>
                             @else
-                                <li><a class="btn btn-danger btn-sm" href="{{ url('/login') }}">Login</a></li>
-                            @endif --}}
+                                <li>
+                                    <a class="btn btn-danger btn-sm" href="{{ route('login') }}">Login
+                                    </a>
+                                </li>
+                            @endif
 
                         </ul>
                     </div>
@@ -33,7 +41,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <img class="logo_dark" src="assets/images/logo_dark.png" alt="logo" />
+                    <img class="logo_dark" src="{{ asset('assets/images/logo_dark.png') }}" alt="logo" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-expanded="false">

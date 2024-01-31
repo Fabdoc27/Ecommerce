@@ -132,26 +132,6 @@
         });
     }
 
-    // async function productReview() {
-    //     let res = await axios.get("/ListReviewByProduct/" + id);
-    //     let Details = await res.data['data'];
-
-    //     $("#reviewList").empty();
-
-    //     Details.forEach((item, i) => {
-    //         let each = `<li class="list-group-item">
-    //             <h6>${item['profile']['cus_name']}</h6>
-    //             <p class="m-0 p-0">${item['description']}</p>
-    //             <div class="rating_wrap">
-    //                 <div class="rating">
-    //                     <div class="product_rate" style="width:${parseFloat(item['rating'])}%"></div>
-    //                 </div>
-    //             </div>
-    //         </li>`;
-    //         $("#reviewList").append(each);
-    //     })
-    // }
-
     async function AddToCart() {
         try {
             let p_size = document.getElementById('p_size').value;
@@ -159,14 +139,12 @@
             let p_qty = document.getElementById('p_qty').value;
 
             if (p_size.length === 0) {
-                // errorToast("Product Size Required");
-                alert("Product Size Required");
+                errorToast("Product Size Required");
             } else if (p_color.length === 0) {
-                // errorToast("Product Color Required");
-                alert("Product Color Required");
+                errorToast("Product Color Required");
             } else if (p_qty.length === 0) {
-                // errorToast("Product Quantity Required");
-                alert("Product Quantity Required");
+                errorToast("Product Quantity Required");
+
             } else {
                 $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
                 let res = await axios.post("/createCart", {
@@ -179,8 +157,7 @@
                 $(".preloader").delay(90).fadeOut(100).addClass('loaded');
 
                 if (res.status === 200) {
-                    // successToast("Product Added to Cart")
-                    alert("Product Added to Cart")
+                    successToast("Product Added to Cart")
                 }
             }
 
@@ -198,9 +175,9 @@
             let res = await axios.get("/createWishlist/" + id);
             $(".preloader").delay(90).fadeOut(100).addClass('loaded');
 
+
             if (res.status === 200) {
-                // successToast("Product Added to wishlist")
-                alert("Product Added to wishlist")
+                successToast("Product Added to wishlist");
             }
         } catch (e) {
             if (e.response.status === 401) {
@@ -210,25 +187,46 @@
         }
     }
 
-    // async function AddReview() {
-    //     let reviewText = document.getElementById('reviewTextID').value;
-    //     let reviewScore = document.getElementById('reviewScore').value;
-    //     if (reviewScore.length === 0) {
-    //         alert("Score Required !")
-    //     } else if (reviewText.length === 0) {
-    //         alert("Review Required !")
-    //     } else {
-    //         $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
-    //         let postBody = {
-    //             description: reviewText,
-    //             rating: reviewScore,
-    //             product_id: id
-    //         }
-    //         let res = await axios.post("/CreateProductReview", postBody);
-    //         $(".preloader").delay(90).fadeOut(100).addClass('loaded');
-    //         await productReview();
-    //     }
+    async function productReview() {
+        let res = await axios.get("/review/" + id);
+        let Details = await res.data['data'];
 
+        $("#reviewList").empty();
 
-    // }
+        Details.forEach((item, i) => {
+            let each = `<li class="list-group-item">
+                            <h6>${item['review']['cust_name']}</h6>
+                            <p class="m-0 p-0">${item['description']}</p>
+                            <div class="rating_wrap">
+                                <div class="rating">
+                                    <div class="product_rate" style="width:${parseFloat(item['rating'])}%"></div>
+                                </div>
+                            </div>
+                        </li>`
+            $("#reviewList").append(each);
+        })
+    }
+
+    async function addReview() {
+        let reviewText = document.getElementById('reviewTextID').value;
+        let reviewScore = document.getElementById('reviewScore').value;
+
+        if (reviewScore.length === 0) {
+            errorToast("Rating Required")
+        } else if (reviewText.length === 0) {
+            errorToast("Review Required")
+        } else {
+            $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
+            let postBody = {
+                description: reviewText,
+                rating: reviewScore,
+                product_id: id
+            }
+
+            let res = await axios.post("/review", postBody);
+            successToast("Review Added");
+            $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+            await productReview();
+        }
+    }
 </script>

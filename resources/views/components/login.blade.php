@@ -38,7 +38,7 @@
                 window.location.href = "/verify-login";
 
             } else {
-                // errorToast("Something Went Wrong");
+                errorToast("Something Went Wrong");
                 $(".preloader").delay(90).fadeOut(100).addClass('loaded');
             }
         }

@@ -27,6 +27,7 @@
     async function verify() {
         let code = document.getElementById('code').value;
         let email = sessionStorage.getItem('email');
+
         if (code.length === 0) {
             errorToast("Code Required");
         } else {
@@ -35,17 +36,23 @@
 
             if (res.status === 200) {
                 if (sessionStorage.getItem("last_location")) {
-                    // successToast("Login Successful");
-                    window.location.href = sessionStorage.getItem("last_location");
-                } else {
-                    // successToast("Login Successful");
-                    window.location.href = "/"
-                }
+                    successToast("Login Successful");
+                    setTimeout(function() {
+                        window.location.href = sessionStorage.getItem("last_location");
+                    }, 1000);
 
+                } else {
+                    successToast("Login Successful");
+                    setTimeout(function() {
+                        window.location.href = "/";
+                    }, 1000);
+                }
             } else {
-                // errorToast("Request Failed");
+                errorToast("Request Failed");
                 $(".preloader").delay(90).fadeOut(100).addClass('loaded');
-                window.location.href = "/login";
+                setTimeout(function() {
+                    window.location.href = "/login";
+                }, 1000);
             }
         }
     }

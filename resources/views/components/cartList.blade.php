@@ -1,4 +1,3 @@
-<!-- START SECTION BREADCRUMB -->
 <div class="breadcrumb_section bg_gray page-title-mini">
     <div class="container">
         <div class="row align-items-center">
@@ -14,7 +13,7 @@
                 </ol>
             </div>
         </div>
-    </div><!-- END CONTAINER-->
+    </div>
 </div>
 
 <div class="mt-5">
@@ -107,37 +106,40 @@
         if (res.status === 200) {
             await cartList();
         } else {
-            alert("Request Fail")
+            errorToast("Request Failed")
         }
     }
 
 
-    // async function CheckOut() {
-    //     $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
+    async function CheckOut() {
+        $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
 
-    //     $("#paymentList").empty();
+        $("#paymentList").empty();
+        let res = await axios.get("/invoice");
 
-    //     let res = await axios.get("/InvoiceCreate");
-
-    //     $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+        $(".preloader").delay(90).fadeOut(100).addClass('loaded');
 
 
-    //     if (res.status === 200) {
+        if (res.status === 200) {
+            $("#paymentMethodModal").modal('show');
 
-    //         $("#paymentMethodModal").modal('show');
+            res.data['data'][0]['paymentMethod'].forEach((item, i) => {
+                let EachItem = `<tr>
+                                    <td>
+                                        <img class="w-50" src=${item['logo']} alt="product">
+                                    </td>
+                                    <td><p>${item['name']}</p></td>
+                                    <td>
+                                        <a class="btn btn-danger btn-sm" href="${item['redirectGatewayURL']}">Pay
+                                        </a>
+                                    </td>
+                                </tr>`
+                $("#paymentList").append(EachItem);
+            })
 
-    //         res.data['data'][0]['paymentMethod'].forEach((item, i) => {
-    //             let EachItem = `<tr>
-    //                             <td><img class="w-50" src=${item['logo']} alt="product"></td>
-    //                             <td><p>${item['name']}</p></td>
-    //                             <td><a class="btn btn-danger btn-sm" href="${item['redirectGatewayURL']}">Pay</a></td>
-    //                         </tr>`
-    //             $("#paymentList").append(EachItem);
-    //         })
+        } else {
+            errorToast("Request Failed");
+        }
 
-    //     } else {
-    //         alert("Request Fail");
-    //     }
-
-    // }
+    }
 </script>

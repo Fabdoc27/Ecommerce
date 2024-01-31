@@ -38,7 +38,7 @@ Route::get( '/policy/{type}', [PolicyController::class, 'PolicyByType'] );
 // auth
 Route::get( '/user-login/{email}', [UserController::class, 'userLogin'] );
 Route::get( '/verify/{email}/{otp}', [UserController::class, 'verifyLogin'] );
-Route::get( '/logout', [UserController::class, 'userLogout'] );
+Route::get( '/logout', [UserController::class, 'userLogout'] )->name( 'logout' );
 
 // profile
 Route::post( '/profile', [CustomerProfileController::class, 'createProfile'] )->middleware( 'token' );
@@ -57,7 +57,7 @@ Route::get( '/removeCart/{product_id}', [ProductCartController::class, 'removeCa
 // invoice
 Route::get( '/invoiceList', [InvoiceController::class, 'invoiceList'] )->middleware( 'token' );
 Route::get( '/invoice', [InvoiceController::class, 'createInvoice'] )->middleware( 'token' );
-Route::get( '/invoice/{invoice_id}', [InvoiceController::class, 'invoiceProductsList'] )->middleware( 'token' );
+Route::get( '/invoice-products/{invoice_id}', [InvoiceController::class, 'invoiceProductsList'] )->middleware( 'token' );
 
 // payment
 Route::post( '/paymentSuccess', [InvoiceController::class, 'paymentSuccess'] );
@@ -70,7 +70,8 @@ Route::view( '/category-product', 'pages.productByCategory' );
 Route::view( '/brand-product', 'pages.productByBrand' );
 Route::view( '/policies', 'pages.policy' );
 Route::view( '/product', 'pages.product' );
-Route::view( '/login', 'pages.loginPage' );
+Route::view( '/login', 'pages.loginPage' )->name( 'login' );
 Route::view( '/verify-login', 'pages.verifyLogin' );
 Route::view( '/wishlist', 'pages.userWishlist' )->name( 'wishlist' );
 Route::view( '/cart', 'pages.cart' )->name( 'cart' );
+Route::view( '/profile-details', 'pages.profile' )->name( 'profile' );

@@ -85,7 +85,7 @@
         if (res.status === 200) {
             await wishList();
         } else {
-            alert("Request Fail")
+            errorToast("Request Failed")
         }
     }
 </script>

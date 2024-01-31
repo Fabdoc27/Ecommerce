@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Helper\JWTToken;
+use App\Helper\ResponseHelper;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,8 +19,9 @@ class TokenAuthenticationMiddleware {
         $result = JWTToken::verifyToken( $token );
 
         if ( $result == "Unauthorized" ) {
-            return redirect( '/userLogin' );
+            return ResponseHelper::Output( 'unauthorized', null, 401 );
         } else {
+
             $request->headers->set( 'email', $result->userEmail );
             $request->headers->set( 'id', $result->userId );
             return $next( $request );
