@@ -36,7 +36,7 @@ Route::post( '/review', [ProductReviewController::class, 'createReview'] )->midd
 Route::get( '/policy/{type}', [PolicyController::class, 'PolicyByType'] );
 
 // auth
-Route::get( '/login/{email}', [UserController::class, 'userLogin'] );
+Route::get( '/user-login/{email}', [UserController::class, 'userLogin'] );
 Route::get( '/verify/{email}/{otp}', [UserController::class, 'verifyLogin'] );
 Route::get( '/logout', [UserController::class, 'userLogout'] );
 
@@ -45,12 +45,12 @@ Route::post( '/profile', [CustomerProfileController::class, 'createProfile'] )->
 Route::get( '/userProfile', [CustomerProfileController::class, 'getProfile'] )->middleware( 'token' );
 
 // wishlist
-Route::get( '/wishlist', [ProductWishlistController::class, 'wishlist'] )->middleware( 'token' );
+Route::get( '/userWishlist', [ProductWishlistController::class, 'wishlist'] )->middleware( 'token' );
 Route::get( '/createWishlist/{product_id}', [ProductWishlistController::class, 'createWishlist'] )->middleware( 'token' );
 Route::get( '/removeWishlist/{product_id}', [ProductWishlistController::class, 'removeWishlist'] )->middleware( 'token' );
 
 // cart
-Route::get( '/cart', [ProductCartController::class, 'cartList'] )->middleware( 'token' );
+Route::get( '/cart-list', [ProductCartController::class, 'cartList'] )->middleware( 'token' );
 Route::post( '/createCart', [ProductCartController::class, 'createCart'] )->middleware( 'token' );
 Route::get( '/removeCart/{product_id}', [ProductCartController::class, 'removeCart'] )->middleware( 'token' );
 
@@ -71,3 +71,6 @@ Route::view( '/brand-product', 'pages.productByBrand' );
 Route::view( '/policies', 'pages.policy' );
 Route::view( '/product', 'pages.product' );
 Route::view( '/login', 'pages.loginPage' );
+Route::view( '/verify-login', 'pages.verifyLogin' );
+Route::view( '/wishlist', 'pages.userWishlist' )->name( 'wishlist' );
+Route::view( '/cart', 'pages.cart' )->name( 'cart' );

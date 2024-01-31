@@ -18,7 +18,8 @@ class ProductWishlistController extends Controller {
     public function createWishlist( Request $request ): JsonResponse {
         $userId = $request->header( 'id' );
         $data   = ProductWish::updateOrCreate(
-            ['user_id' => $userId, 'product_id' => $request->product_id], ['user_id' => $userId, 'product_id' => $request->product_id]
+            ['user_id' => $userId, 'product_id' => $request->product_id],
+            ['user_id' => $userId, 'product_id' => $request->product_id]
         );
 
         return ResponseHelper::Output( 'success', $data, 200 );

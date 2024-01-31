@@ -159,11 +159,14 @@
             let p_qty = document.getElementById('p_qty').value;
 
             if (p_size.length === 0) {
-                errorToast("Product Size Required");
+                // errorToast("Product Size Required");
+                alert("Product Size Required");
             } else if (p_color.length === 0) {
-                errorToast("Product Color Required");
+                // errorToast("Product Color Required");
+                alert("Product Color Required");
             } else if (p_qty.length === 0) {
-                errorToast("Product Quantity Required");
+                // errorToast("Product Quantity Required");
+                alert("Product Quantity Required");
             } else {
                 $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
                 let res = await axios.post("/createCart", {
@@ -176,7 +179,8 @@
                 $(".preloader").delay(90).fadeOut(100).addClass('loaded');
 
                 if (res.status === 200) {
-                    successToast("Product Added to Cart")
+                    // successToast("Product Added to Cart")
+                    alert("Product Added to Cart")
                 }
             }
 
@@ -195,11 +199,12 @@
             $(".preloader").delay(90).fadeOut(100).addClass('loaded');
 
             if (res.status === 200) {
-                successToast("Product Added to wishlist")
+                // successToast("Product Added to wishlist")
+                alert("Product Added to wishlist")
             }
         } catch (e) {
             if (e.response.status === 401) {
-                sessionStorage.setItem("last_location", window.location.href)
+                sessionStorage.setItem("last_location", window.location.href);
                 window.location.href = "/login"
             }
         }

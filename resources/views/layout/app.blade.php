@@ -41,6 +41,7 @@
 
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/axios.min.js') }}"></script>
+    <script src="{{ asset('assets/js/toastify-js.js') }}"></script>
 
 </head>
 
@@ -61,9 +62,7 @@
     <script src="{{ asset('assets/js/magnific-popup.min.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script>
-        src = "{{ asset('assets/js/toastify-js.js') }}"
-    </script>
+
 </body>
 
 </html>

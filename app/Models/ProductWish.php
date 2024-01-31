@@ -9,6 +9,6 @@ class ProductWish extends Model {
     protected $fillable = ['product_id', 'user_id'];
 
     public function products(): BelongsTo {
-        return $this->belongsTo( Product::class );
+        return $this->belongsTo( Product::class, 'product_id' );
     }
 }
