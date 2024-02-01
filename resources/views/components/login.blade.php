@@ -34,8 +34,11 @@
             let res = await axios.get("/user-login/" + email);
 
             if (res.status === 200) {
-                sessionStorage.setItem('email', email);
-                window.location.href = "/verify-login";
+                successToast(res.data['data']);
+                setTimeout(function() {
+                    sessionStorage.setItem('email', email);
+                    window.location.href = "/verify-login";
+                }, 1000);
 
             } else {
                 errorToast("Something Went Wrong");

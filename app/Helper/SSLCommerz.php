@@ -47,7 +47,6 @@ class SSLCommerz {
 
         } catch ( Exception $e ) {
             return $sslCommerz;
-            // return "hello";
         }
     }
 

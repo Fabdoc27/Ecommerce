@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string( 'cust_postcode', 10 );
             $table->string( 'cust_country', 50 );
             $table->string( 'cust_phone', 50 );
+            $table->string( 'cust_fax', 50 );
 
             $table->string( 'ship_name', 100 );
             $table->string( 'ship_add' );

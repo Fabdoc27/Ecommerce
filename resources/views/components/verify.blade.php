@@ -25,34 +25,39 @@
 
 <script>
     async function verify() {
-        let code = document.getElementById('code').value;
-        let email = sessionStorage.getItem('email');
+        try {
+            let code = document.getElementById('code').value;
+            let email = sessionStorage.getItem('email');
 
-        if (code.length === 0) {
-            errorToast("Code Required");
-        } else {
-            $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
-            let res = await axios.get("/verify/" + email + "/" + code);
-
-            if (res.status === 200) {
-                if (sessionStorage.getItem("last_location")) {
-                    successToast("Login Successful");
-                    setTimeout(function() {
-                        window.location.href = sessionStorage.getItem("last_location");
-                    }, 1000);
-
-                } else {
-                    successToast("Login Successful");
-                    setTimeout(function() {
-                        window.location.href = "/";
-                    }, 1000);
-                }
+            if (code.length === 0) {
+                errorToast("Code Required");
             } else {
+                $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
+                let res = await axios.get("/verify/" + email + "/" + code);
+                console.log(res);
+                if (res.status === 200) {
+                    if (sessionStorage.getItem("last_location")) {
+                        successToast("Login Successful");
+                        setTimeout(function() {
+                            window.location.href = sessionStorage.getItem("last_location");
+                        }, 1000);
+
+                    } else {
+                        successToast("Login Successful");
+                        setTimeout(function() {
+                            window.location.href = "/";
+                        }, 1000);
+                    }
+                }
+            }
+        } catch (e) {
+            if (e.response.status === 401) {
                 errorToast("Request Failed");
-                $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+                $(".preloader").delay(90).fadeOut(100).removeClass('loaded');
                 setTimeout(function() {
+                    sessionStorage.clear();
                     window.location.href = "/login";
-                }, 1000);
+                }, 1500);
             }
         }
     }
