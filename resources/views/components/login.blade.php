@@ -32,8 +32,9 @@
         } else {
             $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
             let res = await axios.get("/user-login/" + email);
+            console.log(res.data.msg);
 
-            if (res.status === 200) {
+            if (res.status === 200 && res.data.msg === 'success') {
                 successToast(res.data['data']);
                 setTimeout(function() {
                     sessionStorage.setItem('email', email);

@@ -31,6 +31,8 @@
 
             if (code.length === 0) {
                 errorToast("Code Required");
+            } else if (code.length < 6) {
+                errorToast("Code Must be 6 digits");
             } else {
                 $(".preloader").delay(90).fadeIn(100).removeClass('loaded');
                 let res = await axios.get("/verify/" + email + "/" + code);

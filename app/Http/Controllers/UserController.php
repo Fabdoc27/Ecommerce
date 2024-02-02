@@ -14,16 +14,6 @@ use Illuminate\Support\Facades\Mail;
 class UserController extends Controller {
     public function userLogin( Request $request ): JsonResponse {
         try {
-            // $rules = [
-            //     'email' => 'required|email',
-            // ];
-
-            // $validator = Validator::make( $request->all(), $rules );
-
-            // if ( $validator->fails() ) {
-            //     return ResponseHelper::Output( 'failed', $validator->errors()->first(), 200 );
-            // }
-
             $email   = $request->email;
             $otp     = rand( 100000, 999999 );
             $details = ['code' => $otp];
@@ -38,17 +28,6 @@ class UserController extends Controller {
     }
 
     public function verifyLogin( Request $request ): JsonResponse {
-        // $rules = [
-        //     'email' => 'required|email',
-        //     'otp'   => 'required|min:6',
-        // ];
-
-        // $validator = Validator::make( $request->all(), $rules );
-
-        // if ( $validator->fails() ) {
-        //     return ResponseHelper::Output( 'failed', $validator->errors()->first(), 200 );
-        // }
-
         $email = $request->email;
         $otp   = $request->otp;
 
