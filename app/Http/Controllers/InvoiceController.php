@@ -87,15 +87,18 @@ class InvoiceController extends Controller {
     }
 
     public function paymentSuccess( Request $request ) {
-        return SSLCommerz::initiateSuccess( $request->query( 'tran_id' ) );
+        SSLCommerz::initiateSuccess( $request->query( 'tran_id' ) );
+        return redirect( '/profile-details' );
     }
 
     public function paymentCancel( Request $request ) {
-        return SSLCommerz::initiateCancel( $request->query( 'tran_id' ) );
+        SSLCommerz::initiateCancel( $request->query( 'tran_id' ) );
+        return redirect( '/profile-details' );
     }
 
     public function paymentFailed( Request $request ) {
-        return SSLCommerz::initiateFailed( $request->query( 'tran_id' ) );
+        SSLCommerz::initiateFailed( $request->query( 'tran_id' ) );
+        return redirect( '/profile-details' );
     }
 
     public function paymentIPN( Request $request ) {

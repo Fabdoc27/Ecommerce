@@ -124,7 +124,7 @@
             $("#paymentMethodModal").modal('show');
 
             res.data['data'][0]['paymentMethod'].forEach((item, i) => {
-                let EachItem = `<tr>
+                let eachItem = `<tr>
                                     <td>
                                         <img class="w-50" src=${item['logo']} alt="product">
                                     </td>
@@ -134,12 +134,11 @@
                                         </a>
                                     </td>
                                 </tr>`
-                $("#paymentList").append(EachItem);
+                $("#paymentList").append(eachItem);
             })
 
         } else {
             errorToast("Request Failed");
         }
-
     }
 </script>

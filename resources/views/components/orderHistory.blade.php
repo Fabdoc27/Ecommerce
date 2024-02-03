@@ -64,7 +64,7 @@
             json.forEach((item, i) => {
                 let rows = `<tr>
                                 <td>${item['id']}</td>
-                                <td>$ ${item['payable']} </td>
+                                <td>BDT ${item['payable']} </td>
                                 <td>${item['ship_details']}</td>
                                 <td>${item['delivery_status']}</td>
                                 <td>${item['payment_status']}</td>
@@ -98,7 +98,7 @@
             let rows = `<tr>
                             <td>${item['products']['title']}</td>
                             <td>${item['qty']}</td>
-                            <td>$ ${item['sale_price']}</td>
+                            <td>BDT ${item['sale_price']}</td>
                         </tr>`
             $("#productList").append(rows);
         });
