@@ -28,7 +28,6 @@ class SSLCommerz {
                 "cus_postcode"     => $user->cust_postcode,
                 "cus_country"      => $user->cust_country,
                 "cus_phone"        => $user->cust_phone,
-                "cus_fax"          => $user->cust_phone,
                 "shipping_method"  => "YES",
                 "ship_name"        => $user->ship_name,
                 "ship_add1"        => $user->ship_add,
@@ -50,25 +49,25 @@ class SSLCommerz {
         }
     }
 
-    static function paymentSuccess( $transactionId ) {
+    static function initiateSuccess( $transactionId ) {
         Invoice::where( ['tran_id' => $transactionId, 'val_id' => 0] )->update( ['payment_status' => 'Success'] );
 
         return 1;
     }
 
-    static function paymentCancel( $transactionId ) {
+    static function initiateCancel( $transactionId ) {
         Invoice::where( ['tran_id' => $transactionId, 'val_id' => 0] )->update( ['payment_status' => 'Cancel'] );
 
         return 1;
     }
 
-    static function paymentFailed( $transactionId ) {
+    static function initiateFailed( $transactionId ) {
         Invoice::where( ['tran_id' => $transactionId, 'val_id' => 0] )->update( ['payment_status' => 'Failed'] );
 
         return 1;
     }
 
-    static function paymentIPN( $transactionId, $status, $validationId ) {
+    static function initiateIPN( $transactionId, $status, $validationId ) {
         Invoice::where( ['tran_id' => $transactionId, 'val_id' => 0] )->update( [
             'payment_status' => $status,
             'val_id'         => $validationId,
