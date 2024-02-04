@@ -9,6 +9,7 @@
     @section('content')
         @include('components.menubar')
         @include('components.cartList')
+        @include('components.paymentMethodList')
         @include('components.topBrands')
         @include('components.footer')
         <script>

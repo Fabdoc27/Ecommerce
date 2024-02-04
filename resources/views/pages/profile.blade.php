@@ -41,6 +41,7 @@
         @include('components.footer')
         <script>
             (async () => {
+                await category();
                 await orderHistories();
                 await profileDetails();
                 $(".preloader").delay(90).fadeOut(100).addClass('loaded');
