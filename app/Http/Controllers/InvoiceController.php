@@ -17,6 +17,7 @@ class InvoiceController extends Controller {
         $userId = $request->header( 'id' );
         return Invoice::where( 'user_id', $userId )->get();
     }
+
     public function createInvoice( Request $request ) {
         DB::beginTransaction();
         try {
