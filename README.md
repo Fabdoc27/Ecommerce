@@ -37,13 +37,7 @@ Follow these steps to set up the project:
     php artisan migrate
     ```
 
-6. **Seed the database:**
-
-    ```shell
-    php artisan db:seed
-    ```
-
-7. **Start the development server:**
+6. **Start the development server:**
 
     ```shell
     php artisan serve
